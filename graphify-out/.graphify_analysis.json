@@ -1,0 +1,511 @@
+{
+  "communities": {
+    "0": [
+      "any",
+      "app_agent",
+      "app_agent_agent",
+      "app_agent_agent_answer",
+      "app_agent_agent_init",
+      "app_agent_agentresult",
+      "app_agent_agentresult_latency_ms",
+      "app_agent_agentresult_n_calls",
+      "app_agent_build_context",
+      "app_agent_planner",
+      "app_agent_planner_plan",
+      "app_agent_rationale_1",
+      "app_agent_rationale_112",
+      "app_agent_rationale_144",
+      "app_agent_rationale_154",
+      "app_agent_rationale_200",
+      "app_agent_rationale_226",
+      "app_agent_retrievaltool",
+      "app_agent_retrievaltool_call",
+      "app_agent_retrievaltool_init",
+      "app_agent_rulebasedplanner",
+      "app_agent_rulebasedplanner_detect_topic",
+      "app_agent_rulebasedplanner_detect_year",
+      "app_agent_rulebasedplanner_init",
+      "app_agent_rulebasedplanner_plan",
+      "app_agent_singleshotplanner",
+      "app_agent_singleshotplanner_init",
+      "app_agent_singleshotplanner_plan",
+      "app_agent_toolargs",
+      "app_agent_toolargs_as_dict",
+      "app_agent_toolcall",
+      "notebooks_06_agent_retrieval",
+      "notebooks_06_agent_retrieval_evaluate",
+      "notebooks_06_agent_retrieval_rationale_144",
+      "notebooks_06_agent_retrieval_starvingplanner",
+      "notebooks_06_agent_retrieval_starvingplanner_plan",
+      "protocol",
+      "tests_test_agent",
+      "tests_test_agent_rationale_14",
+      "tests_test_agent_rationale_31",
+      "tests_test_agent_test_agent_relaxes_a_starving_filter",
+      "tests_test_agent_test_budget_is_split_not_multiplied",
+      "tests_test_agent_test_build_context_runs_without_feast",
+      "tests_test_agent_test_planner_keeps_simple_questions_whole",
+      "tests_test_agent_test_planner_splits_compound_questions",
+      "tests_test_agent_test_tool_schema_is_wellformed",
+      "tests_test_agent_test_tool_topic_enum_matches_the_corpus",
+      "tests_test_agent_test_use_filters_false_emits_no_filters"
+    ],
+    "1": [
+      "app_features",
+      "app_features_auc",
+      "app_features_frequency_encode",
+      "app_features_generate_events",
+      "app_features_latest_join",
+      "app_features_leakage_experiment",
+      "app_features_leaked_row_fraction",
+      "app_features_pit_join",
+      "app_features_py_dataframe",
+      "app_features_py_ndarray",
+      "app_features_rationale_1",
+      "app_features_rationale_100",
+      "app_features_rationale_133",
+      "app_features_rationale_138",
+      "app_features_rationale_145",
+      "app_features_rationale_158",
+      "app_features_rationale_178",
+      "app_features_rationale_189",
+      "app_features_rationale_197",
+      "app_features_rationale_205",
+      "app_features_rationale_34",
+      "app_features_rationale_84",
+      "app_features_target_encode_in_fold",
+      "app_features_target_encode_naive",
+      "app_features_window_aggregates",
+      "app_features_window_seconds",
+      "notebooks_08_feature_engineering",
+      "scripts_verify_lite",
+      "scripts_verify_lite_main",
+      "scripts_verify_lite_rationale_1",
+      "scripts_verify_lite_step",
+      "series",
+      "tests_test_features",
+      "tests_test_features_events",
+      "tests_test_features_py_fixture",
+      "tests_test_features_rationale_31",
+      "tests_test_features_rationale_53",
+      "tests_test_features_test_auc_matches_known_values",
+      "tests_test_features_test_events_are_deterministic",
+      "tests_test_features_test_frequency_encoding_never_uses_the_label",
+      "tests_test_features_test_in_fold_encoding_covers_every_row",
+      "tests_test_features_test_leak_is_smaller_on_lower_cardinality_key",
+      "tests_test_features_test_naive_target_encoding_leaks_on_high_cardinality",
+      "tests_test_features_test_pit_join_never_sees_the_future",
+      "tests_test_features_test_window_counts_are_monotone_by_window_size",
+      "tests_test_features_test_window_features_are_causal"
+    ],
+    "2": [
+      "app_filters",
+      "app_filters_access_filter",
+      "app_filters_combo_filter",
+      "app_filters_rationale_1",
+      "app_filters_rationale_187",
+      "app_filters_recent_filter",
+      "app_filters_tenant_filter",
+      "app_metadata",
+      "app_metadata_digest",
+      "app_metadata_doc_metadata",
+      "app_metadata_enrich",
+      "app_metadata_rationale_1",
+      "app_metadata_rationale_37",
+      "app_metadata_rationale_49",
+      "app_metadata_rationale_63",
+      "app_metadata_rationale_68",
+      "app_metadata_selectivity",
+      "app_search",
+      "app_search_rationale_1",
+      "filter",
+      "notebooks_05_filtered_search",
+      "tests_test_filters",
+      "tests_test_filters_rationale_21",
+      "tests_test_filters_rationale_8",
+      "tests_test_filters_test_every_returned_doc_satisfies_the_filter",
+      "tests_test_filters_test_filtered_ann_matches_exact_ground_truth",
+      "tests_test_filters_test_index_carries_topic_payload",
+      "tests_test_filters_test_overfetch_restores_post_filter_recall",
+      "tests_test_filters_test_post_filter_loses_recall_when_filter_is_selective",
+      "tests_test_metadata",
+      "tests_test_metadata_rationale_5",
+      "tests_test_metadata_test_enrich_preserves_original_fields",
+      "tests_test_metadata_test_metadata_differs_across_docs",
+      "tests_test_metadata_test_metadata_is_deterministic",
+      "tests_test_metadata_test_published_ts_is_sortable_int",
+      "tests_test_metadata_test_tenants_are_roughly_balanced"
+    ],
+    "3": [
+      "app_filters_filteredindex",
+      "app_filters_filteredindex_from_searcher",
+      "app_filters_rationale_58",
+      "app_search_py_path",
+      "app_search_rationale_43",
+      "app_search_searcher",
+      "app_search_searcher_build_bm25",
+      "app_search_searcher_from_corpus",
+      "app_search_searcher_init",
+      "app_search_searcher_load_docs",
+      "app_search_searcher_search",
+      "app_search_searcher_search_hybrid",
+      "app_search_searcher_search_keyword",
+      "app_search_searcher_search_semantic",
+      "app_search_searcher_size",
+      "app_search_searcher_tokenize",
+      "app_search_searchhit",
+      "app_search_searchhit_dict",
+      "mode",
+      "scripts_benchmark",
+      "scripts_benchmark_main",
+      "scripts_benchmark_precision_at_k",
+      "scripts_benchmark_rationale_1",
+      "scripts_benchmark_rationale_34",
+      "scripts_gen_agent_queries",
+      "scripts_gen_agent_queries_main",
+      "scripts_gen_agent_queries_rationale_1",
+      "tests_conftest",
+      "tests_conftest_index",
+      "tests_conftest_mini_corpus",
+      "tests_conftest_py_fixture",
+      "tests_conftest_py_path",
+      "tests_conftest_rationale_1",
+      "tests_conftest_rationale_18"
+    ],
+    "4": [
+      "app_cache",
+      "app_cache_cachehit",
+      "app_cache_cachestats",
+      "app_cache_cachestats_hit_rate",
+      "app_cache_cachestats_total",
+      "app_cache_rationale_1",
+      "app_cache_rationale_117",
+      "app_cache_rationale_72",
+      "app_cache_semanticcache",
+      "app_cache_semanticcache_advance",
+      "app_cache_semanticcache_embed",
+      "app_cache_semanticcache_get",
+      "app_cache_semanticcache_peek",
+      "app_cache_semanticcache_post_init",
+      "app_cache_semanticcache_put",
+      "app_cache_semanticcache_reset_stats",
+      "notebooks_07_semantic_cache",
+      "notebooks_07_semantic_cache_rationale_80",
+      "notebooks_07_semantic_cache_variants",
+      "tests_test_cache",
+      "tests_test_cache_embedder",
+      "tests_test_cache_make",
+      "tests_test_cache_py_fixture",
+      "tests_test_cache_rationale_45",
+      "tests_test_cache_rationale_52",
+      "tests_test_cache_test_identical_question_hits",
+      "tests_test_cache_test_missing_namespace_leaks_on_purpose",
+      "tests_test_cache_test_namespacing_blocks_cross_tenant_read",
+      "tests_test_cache_test_stats_track_hits_and_misses",
+      "tests_test_cache_test_threshold_controls_hits",
+      "tests_test_cache_test_ttl_expires_entry",
+      "tests_test_cache_test_unrelated_question_misses"
+    ],
+    "5": [
+      "app_embeddings",
+      "app_embeddings_backendspec",
+      "app_embeddings_describe",
+      "app_embeddings_embedder",
+      "app_embeddings_embedder_dim",
+      "app_embeddings_embedder_embed",
+      "app_embeddings_embedder_init",
+      "app_embeddings_embedder_load",
+      "app_embeddings_embedder_model_name",
+      "app_embeddings_py_ndarray",
+      "app_embeddings_rationale_1",
+      "app_embeddings_rationale_52",
+      "app_search_searcher_build_vector_index",
+      "tests_test_embeddings",
+      "tests_test_embeddings_rationale_1",
+      "tests_test_embeddings_rationale_15",
+      "tests_test_embeddings_rationale_23",
+      "tests_test_embeddings_rationale_43",
+      "tests_test_embeddings_rationale_59",
+      "tests_test_embeddings_test_default_backend_is_unchanged",
+      "tests_test_embeddings_test_default_embedding_matches_declared_dim",
+      "tests_test_embeddings_test_env_var_is_actually_honoured",
+      "tests_test_embeddings_test_every_backend_declares_a_distinct_dim",
+      "tests_test_embeddings_test_explicit_argument_beats_env",
+      "tests_test_embeddings_test_searcher_collection_uses_backend_dim",
+      "tests_test_embeddings_test_unknown_backend_fails_loudly"
+    ],
+    "6": [
+      "notebooks_01_embeddings_index",
+      "notebooks_01_embeddings_index_rationale_82",
+      "notebooks_02_hybrid_search_rrf",
+      "notebooks_02_hybrid_search_rrf_precision_at_10",
+      "notebooks_02_hybrid_search_rrf_rationale_103",
+      "notebooks_02_hybrid_search_rrf_search_hybrid",
+      "notebooks_02_hybrid_search_rrf_search_keyword",
+      "notebooks_02_hybrid_search_rrf_search_semantic",
+      "notebooks_03_search_api_benchmark",
+      "notebooks_03_search_api_benchmark_benchmark_mode",
+      "notebooks_03_search_api_benchmark_percentile",
+      "notebooks_04_feast_feature_store",
+      "notebooks_04_feast_feature_store_make_item_popularity",
+      "notebooks_04_feast_feature_store_make_query_velocity",
+      "notebooks_04_feast_feature_store_make_user_profile",
+      "notebooks_04_feast_feature_store_py_dataframe",
+      "notebooks_setup",
+      "notebooks_setup_rationale_1"
+    ],
+    "7": [
+      "app_main",
+      "app_main_healthz",
+      "app_main_lifespan",
+      "app_main_rationale_1",
+      "app_main_rationale_31",
+      "app_main_root",
+      "app_main_search",
+      "app_main_searchhitout",
+      "app_main_searchresponse",
+      "basemodel",
+      "fastapi",
+      "get",
+      "scripts_verify_docker",
+      "scripts_verify_docker_can_reach",
+      "scripts_verify_docker_main",
+      "scripts_verify_docker_rationale_1",
+      "scripts_verify_docker_step"
+    ],
+    "8": [
+      "app_filters_filteredindex_embed",
+      "app_filters_filteredindex_exact_top_k",
+      "app_filters_filteredindex_filtered_ann",
+      "app_filters_filteredindex_post_filter",
+      "app_filters_filteredindex_pre_filter",
+      "app_filters_py_ndarray",
+      "app_filters_rationale_121",
+      "app_filters_rationale_132",
+      "app_filters_rationale_143",
+      "app_filters_rationale_151",
+      "app_filters_rationale_33",
+      "app_filters_result",
+      "app_filters_result_recall_against"
+    ],
+    "9": [
+      "scripts_container_up",
+      "scripts_container_up_port_open",
+      "scripts_container_up_sh__entry",
+      "scripts_container_up_start",
+      "scripts_container_up_still_running",
+      "setup_docker",
+      "setup_docker_sh__entry"
+    ],
+    "10": [
+      "app_feast_repo_ondemand_definitions",
+      "app_feast_repo_ondemand_definitions_amount_vs_avg",
+      "app_feast_repo_ondemand_definitions_rationale_1",
+      "app_feast_repo_ondemand_definitions_rationale_65",
+      "on_demand_feature_view"
+    ],
+    "11": [
+      "scripts_seed_corpus",
+      "scripts_seed_corpus_main",
+      "scripts_seed_corpus_make_doc",
+      "scripts_seed_corpus_rationale_1",
+      "scripts_seed_corpus_rationale_173"
+    ],
+    "12": [
+      "scripts_runtime_check",
+      "scripts_runtime_check_bold",
+      "scripts_runtime_check_row",
+      "scripts_runtime_check_sh__entry"
+    ],
+    "13": [
+      "scripts_gen_spend",
+      "scripts_gen_spend_main",
+      "scripts_gen_spend_rationale_1"
+    ],
+    "14": [
+      "app_feast_repo_feature_views",
+      "app_feast_repo_feature_views_rationale_1"
+    ],
+    "15": [
+      "scripts_container_down",
+      "scripts_container_down_sh__entry"
+    ],
+    "16": [
+      "setup_lite",
+      "setup_lite_sh__entry"
+    ],
+    "17": [
+      "app_init"
+    ],
+    "18": [
+      "pkg_day19_vector_feature_store_lab"
+    ]
+  },
+  "cohesion": {
+    "0": 0.07446808510638298,
+    "1": 0.09082125603864734,
+    "2": 0.10317460317460317,
+    "3": 0.1051693404634581,
+    "4": 0.09274193548387097,
+    "5": 0.10461538461538461,
+    "6": 0.1437908496732026,
+    "7": 0.17647058823529413,
+    "8": 0.19230769230769232,
+    "9": 0.42857142857142855,
+    "10": 0.4,
+    "11": 0.5,
+    "12": 0.8333333333333334,
+    "13": 0.6666666666666666,
+    "14": 1.0,
+    "15": 1.0,
+    "16": 1.0,
+    "17": 1.0,
+    "18": 1.0
+  },
+  "gods": [
+    {
+      "id": "app_search_searcher",
+      "label": "Searcher",
+      "degree": 27
+    },
+    {
+      "id": "app_embeddings_embedder",
+      "label": "Embedder",
+      "degree": 18
+    },
+    {
+      "id": "app_filters_filteredindex",
+      "label": "FilteredIndex",
+      "degree": 17
+    },
+    {
+      "id": "app_agent_toolargs",
+      "label": "ToolArgs",
+      "degree": 13
+    },
+    {
+      "id": "app_agent_rulebasedplanner",
+      "label": "RuleBasedPlanner",
+      "degree": 12
+    },
+    {
+      "id": "app_cache_semanticcache",
+      "label": "SemanticCache",
+      "degree": 12
+    },
+    {
+      "id": "app_agent_retrievaltool",
+      "label": "RetrievalTool",
+      "degree": 11
+    },
+    {
+      "id": "app_features_leakage_experiment",
+      "label": "leakage_experiment()",
+      "degree": 11
+    },
+    {
+      "id": "app_metadata_doc_metadata",
+      "label": "doc_metadata()",
+      "degree": 11
+    },
+    {
+      "id": "app_features_auc",
+      "label": "auc()",
+      "degree": 9
+    }
+  ],
+  "surprises": [
+    {
+      "source": "test_planner_keeps_simple_questions_whole()",
+      "target": "RuleBasedPlanner",
+      "source_files": [
+        "tests/test_agent.py",
+        "app/agent.py"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "why": "connects across different repos/directories; peripheral node `test_planner_keeps_simple_questions_whole()` unexpectedly reaches hub `RuleBasedPlanner`"
+    },
+    {
+      "source": "test_planner_splits_compound_questions()",
+      "target": "RuleBasedPlanner",
+      "source_files": [
+        "tests/test_agent.py",
+        "app/agent.py"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "why": "connects across different repos/directories; peripheral node `test_planner_splits_compound_questions()` unexpectedly reaches hub `RuleBasedPlanner`"
+    },
+    {
+      "source": "test_use_filters_false_emits_no_filters()",
+      "target": "RuleBasedPlanner",
+      "source_files": [
+        "tests/test_agent.py",
+        "app/agent.py"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "why": "connects across different repos/directories; peripheral node `test_use_filters_false_emits_no_filters()` unexpectedly reaches hub `RuleBasedPlanner`"
+    },
+    {
+      "source": "StarvingPlanner",
+      "target": "ToolArgs",
+      "source_files": [
+        "notebooks/06_agent_retrieval.py",
+        "app/agent.py"
+      ],
+      "confidence": "INFERRED",
+      "relation": "uses",
+      "why": "inferred connection - not explicitly stated in source; connects across different repos/directories"
+    },
+    {
+      "source": "main()",
+      "target": "FilteredIndex",
+      "source_files": [
+        "scripts/gen_agent_queries.py",
+        "app/filters.py"
+      ],
+      "confidence": "INFERRED",
+      "relation": "uses",
+      "why": "inferred connection - not explicitly stated in source; connects across different repos/directories"
+    }
+  ],
+  "questions": [
+    {
+      "type": "bridge_node",
+      "question": "Why does `Searcher` connect `Searcher` to `test_agent.py`, `filters.py`, `Embedder`, `main.py`?",
+      "why": "High betweenness centrality (0.195) - this node is a cross-community bridge."
+    },
+    {
+      "type": "bridge_node",
+      "question": "Why does `SemanticCache` connect `SemanticCache` to `test_features.py`?",
+      "why": "High betweenness centrality (0.127) - this node is a cross-community bridge."
+    },
+    {
+      "type": "bridge_node",
+      "question": "Why does `FilteredIndex` connect `Searcher` to `test_agent.py`, `Result`, `filters.py`?",
+      "why": "High betweenness centrality (0.086) - this node is a cross-community bridge."
+    },
+    {
+      "type": "verify_inferred",
+      "question": "Are the 6 inferred relationships involving `Searcher` (e.g. with `FilteredIndex` and `lifespan()`) actually correct?",
+      "why": "`Searcher` has 6 INFERRED edges - model-reasoned connections that need verification."
+    },
+    {
+      "type": "verify_inferred",
+      "question": "Are the 4 inferred relationships involving `FilteredIndex` (e.g. with `RetrievalTool` and `Searcher`) actually correct?",
+      "why": "`FilteredIndex` has 4 INFERRED edges - model-reasoned connections that need verification."
+    },
+    {
+      "type": "isolated_nodes",
+      "question": "What connects `BackendSpec`, `container-down.sh script`, `setup-lite.sh script` to the rest of the system?",
+      "why": "4 weakly-connected nodes found - possible documentation gaps or missing edges."
+    },
+    {
+      "type": "low_cohesion",
+      "question": "Should `test_agent.py` be split into smaller, more focused modules?",
+      "why": "Cohesion score 0.07446808510638298 - nodes in this community are weakly interconnected."
+    }
+  ]
+}

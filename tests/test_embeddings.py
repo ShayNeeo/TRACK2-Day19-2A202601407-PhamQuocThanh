@@ -11,8 +11,10 @@ import pytest
 from app.embeddings import BACKENDS, DEFAULT_BACKEND, Embedder
 
 
-def test_default_backend_is_unchanged():
+def test_default_backend_is_unchanged(monkeypatch):
     """The lite path and every rubric threshold depend on this exact default."""
+    monkeypatch.delenv("EMBEDDING_BACKEND", raising=False)
+    monkeypatch.delenv("EMBEDDING_MODEL", raising=False)
     e = Embedder()
     assert e.backend == DEFAULT_BACKEND == "fastembed"
     assert e.model_name == "BAAI/bge-small-en-v1.5"
@@ -44,7 +46,7 @@ def test_every_backend_declares_a_distinct_dim():
     silent 'vector dimension error' at upsert time."""
     for name, spec in BACKENDS.items():
         assert spec.dim > 0, name
-        assert spec.provider in {"fastembed", "sentence-transformers", "openai"}, name
+        assert spec.provider in {"fastembed", "sentence-transformers", "openai", "gemini"}, name
     assert BACKENDS["fastembed"].dim != BACKENDS["bge-m3"].dim
 
 

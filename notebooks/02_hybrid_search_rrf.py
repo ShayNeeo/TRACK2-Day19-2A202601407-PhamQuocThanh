@@ -22,7 +22,7 @@ import json
 import statistics
 from pathlib import Path
 
-from fastembed import TextEmbedding
+from app.embeddings import Embedder
 from qdrant_client import QdrantClient
 from qdrant_client.models import Distance, VectorParams, PointStruct
 from rank_bm25 import BM25Okapi
@@ -40,11 +40,11 @@ tokenized = [(d["title"] + " " + d["text"]).lower().split() for d in docs]
 bm25 = BM25Okapi(tokenized)
 
 # Vector
-embedder = TextEmbedding(model_name="BAAI/bge-small-en-v1.5")
+embedder = Embedder()
 client = QdrantClient(":memory:")
 client.create_collection(
     collection_name="lab19",
-    vectors_config=VectorParams(size=384, distance=Distance.COSINE),
+    vectors_config=VectorParams(size=embedder.dim, distance=Distance.COSINE),
 )
 BATCH = 64
 points = []

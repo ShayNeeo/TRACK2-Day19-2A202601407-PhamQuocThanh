@@ -18,7 +18,7 @@ import _setup  # noqa: F401  -- adds repo root to sys.path
 import json
 from pathlib import Path
 
-from fastembed import TextEmbedding
+from app.embeddings import Embedder
 from qdrant_client import QdrantClient
 from qdrant_client.models import Distance, VectorParams, PointStruct
 
@@ -42,17 +42,14 @@ print(f"First doc:")
 print(json.dumps(docs[0], ensure_ascii=False, indent=2))
 
 # %% [markdown]
-# ## 2. Embedding model: `BAAI/bge-small-en-v1.5`
+# ## 2. Embedding model: `Embedder()`
 #
-# `fastembed` chạy ONNX → CPU friendly, không cần GPU. 384-dim vectors.
-#
-# > Trong production tiếng Việt 2026, bạn nên dùng `bge-m3` hoặc
-# > `text-embedding-3-large` (xem deck §1, bảng *Embedding Models 2026*).
-# > Cho lab này dùng `bge-small-en` để mọi laptop chạy được nhanh.
+# Pluggable backend (fastembed / bge-m3 / gemini / openai) chọn bởi `EMBEDDING_BACKEND`.
 
 # %%
-embedder = TextEmbedding(model_name="BAAI/bge-small-en-v1.5")
+embedder = Embedder()
 sample = list(embedder.embed(["cloud computing tiếng Việt"]))[0]
+print(f"Backend: {embedder.backend} -> {embedder.model_name}")
 print(f"Vector dim: {len(sample)}")
 print(f"First 8 values: {sample[:8].tolist()}")
 
@@ -67,7 +64,7 @@ print(f"First 8 values: {sample[:8].tolist()}")
 client = QdrantClient(":memory:")
 client.create_collection(
     collection_name="lab19",
-    vectors_config=VectorParams(size=384, distance=Distance.COSINE),
+    vectors_config=VectorParams(size=embedder.dim, distance=Distance.COSINE),
 )
 
 # %% [markdown]

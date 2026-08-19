@@ -60,6 +60,8 @@ class SemanticCache:
     _next_id: int = 0
 
     def __post_init__(self) -> None:
+        if hasattr(self.embedder, "dim"):
+            self.dim = self.embedder.dim
         if CACHE_COLLECTION in {c.name for c in self.client.get_collections().collections}:
             self.client.delete_collection(CACHE_COLLECTION)
         self.client.create_collection(

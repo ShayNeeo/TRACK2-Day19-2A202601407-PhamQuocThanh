@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>/ — graphify tree viewer</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f9f9f9;
+      color: #333;
+    }
+    h1 {
+      margin: 20px 0 0 24px;
+      font-size: 2.2rem;
+      font-weight: bold;
+      color: #1e3a56;
+    }
+    .controls {
+      margin: 20px 0 15px 24px;
+    }
+    button {
+      margin-right: 10px;
+      padding: 8px 18px;
+      background: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: background 0.2s ease-in-out;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    button:hover {
+      background: #0056b3;
+    }
+    button:active {
+      background: #004085;
+    }
+    #tree-container {
+      width: calc(100vw - 48px); /* Adjust for body margin/padding */
+      height: 85vh;
+      overflow: auto;
+      border-radius: 8px;
+      background: #fff;
+      margin-left: 24px;
+      margin-right: 24px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      border: 1px solid #ddd;
+    }
+    svg {
+      background: #fff;
+      border-radius: 8px;
+      display: block; /* Important for D3 */
+    }
+    .node circle {
+      stroke-width: 2.5px;
+    }
+    .node text { /* Base style for the <text> container */
+      font: 13px 'Segoe UI', sans-serif;
+      paint-order: stroke fill; /* Ensures text is readable over lines */
+      stroke: #fff; /* White halo */
+      stroke-width: 3px; /* Halo thickness */
+      stroke-linejoin: round;
+      stroke-opacity: 0.85; /* Halo opacity */
+    }
+    .link {
+      fill: none;
+      stroke-opacity: 0.7;
+      stroke-width: 2px;
+    }
+  </style>
+</head>
+<body>
+  <h1>/ — Knowledge Graph</h1>
+  <div class="controls">
+    <button onclick="expandAll()">Expand All</button>
+    <button onclick="collapseAll()">Collapse All</button>
+    <button onclick="resetView()">Reset View</button>
+  </div>
+  <div id="tree-container">
+    <svg id="tree-svg" width="6000" height="8000"></svg>
+  </div>
+
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script>
+    const initialJsonData = {"name":"/","total_count":248,"children":[{"name":"app","total_count":136,"children":[{"name":"agent.py","total_count":29,"children":[{"name":".__call__()","total_count":1,"children":[]},{"name":".__init__()","total_count":1,"children":[]},{"name":".__init__()","total_count":1,"children":[]},{"name":".__init__()","total_count":1,"children":[]},{"name":".__init__()","total_count":1,"children":[]},{"name":".answer()","total_count":1,"children":[]},{"name":".as_dict()","total_count":1,"children":[]},{"name":".detect_topic()","total_count":1,"children":[]},{"name":".detect_year()","total_count":1,"children":[]},{"name":".latency_ms()","total_count":1,"children":[]},{"name":".n_calls()","total_count":1,"children":[]},{"name":".plan()","total_count":1,"children":[]},{"name":".plan()","total_count":1,"children":[]},{"name":".plan()","total_count":1,"children":[]},{"name":"Agent","total_count":1,"children":[]},{"name":"AgentResult","total_count":1,"children":[]},{"name":"build_context()","total_count":1,"children":[]},{"name":"Decompose -> (optionally) infer filters -> same budget, split per part.\u2026","total_count":1,"children":[]},{"name":"plan -> call -> reflect -> (maybe) retry with the filters relaxed.","total_count":1,"children":[]},{"name":"Planner","total_count":1,"children":[]},{"name":"Retrieval as a tool + a zero-key planning agent (NB6). Deck reference:\u2026","total_count":1,"children":[]},{"name":"RetrievalTool","total_count":1,"children":[]},{"name":"RuleBasedPlanner","total_count":1,"children":[]},{"name":"SingleShotPlanner","total_count":1,"children":[]},{"name":"The baseline: embed the whole question once, retrieve once.","total_count":1,"children":[]},{"name":"The executable behind SEARCH_TOOL.","total_count":1,"children":[]},{"name":"ToolArgs","total_count":1,"children":[]},{"name":"ToolCall","total_count":1,"children":[]},{"name":"Where the two halves of Day 19 meet. Feature store answers \"who is this user\"\u2026","total_count":1,"children":[]}]},{"name":"cache.py","total_count":15,"children":[{"name":".__post_init__()","total_count":1,"children":[]},{"name":"._embed()","total_count":1,"children":[]},{"name":".advance()","total_count":1,"children":[]},{"name":".get()","total_count":1,"children":[]},{"name":".hit_rate()","total_count":1,"children":[]},{"name":".peek()","total_count":1,"children":[]},{"name":".put()","total_count":1,"children":[]},{"name":".reset_stats()","total_count":1,"children":[]},{"name":".total()","total_count":1,"children":[]},{"name":"CacheHit","total_count":1,"children":[]},{"name":"CacheStats","total_count":1,"children":[]},{"name":"Move the virtual clock forward (so TTL is testable in a notebook).","total_count":1,"children":[]},{"name":"Nearest cached entry + its score, WITHOUT applying threshold or TTL. Lets a\u2026","total_count":1,"children":[]},{"name":"Semantic cache over Qdrant (NB7). Deck reference: \"Semantic Cache: Hien Thuc\u2026","total_count":1,"children":[]},{"name":"SemanticCache","total_count":1,"children":[]}]},{"name":"embeddings.py","total_count":10,"children":[{"name":".__init__()","total_count":1,"children":[]},{"name":"._load()","total_count":1,"children":[]},{"name":".dim()","total_count":1,"children":[]},{"name":".embed()","total_count":1,"children":[]},{"name":".model_name()","total_count":1,"children":[]},{"name":"BackendSpec","total_count":1,"children":[]},{"name":"describe()","total_count":1,"children":[]},{"name":"Embedder","total_count":1,"children":[]},{"name":"Pluggable embedding backends, selected by the EMBEDDING_BACKEND env var. Why\u2026","total_count":1,"children":[]},{"name":"Uniform `.embed(list[str]) -> Iterator[np.ndarray]`, matching fastembed.","total_count":1,"children":[]}]},{"name":"feast_repo","total_count":1,"children":[{"name":"feature_views.py","total_count":1,"children":[{"name":"Feast feature definitions for Lab 19. Three feature views \u2014 one per realistic\u2026","total_count":1,"children":[]}]}]},{"name":"feast_repo_ondemand","total_count":3,"children":[{"name":"definitions.py","total_count":3,"children":[{"name":"amount_vs_avg()","total_count":1,"children":[]},{"name":"On-demand feature transformation: the request-time ratio (NB8). Deck reference:\u2026","total_count":1,"children":[]},{"name":"Ratio of this transaction to the user's own recent baseline. Absolute amount is\u2026","total_count":1,"children":[]}]}]},{"name":"features.py","total_count":23,"children":[{"name":"_window_seconds()","total_count":1,"children":[]},{"name":"A search-event log: who searched what, when, and did they click. `clicked` is\u2026","total_count":1,"children":[]},{"name":"auc()","total_count":1,"children":[]},{"name":"Correct: a row is encoded using only the OTHER folds' labels.","total_count":1,"children":[]},{"name":"Family 1 + 3 + 4, computed causally (each row sees only its own past).","total_count":1,"children":[]},{"name":"Feature engineering the six families, plus the two classic ways to leak (NB8).\u2026","total_count":1,"children":[]},{"name":"frequency_encode()","total_count":1,"children":[]},{"name":"generate_events()","total_count":1,"children":[]},{"name":"latest_join()","total_count":1,"children":[]},{"name":"leakage_experiment()","total_count":1,"children":[]},{"name":"leaked_row_fraction()","total_count":1,"children":[]},{"name":"LEAKY: every row's encoding includes that row's own label.","total_count":1,"children":[]},{"name":"Parse \"1h\" / \"24h\" / \"7d\" -> seconds. Deliberately avoids `pd.Timedelta`:\u2026","total_count":1,"children":[]},{"name":"pit_join()","total_count":1,"children":[]},{"name":"Rank-based ROC AUC. Pure numpy -- no sklearn dependency.","total_count":1,"children":[]},{"name":"RIGHT: as-of join -- each row sees only values that already existed.","total_count":1,"children":[]},{"name":"Safe: depends only on the feature distribution, never on the label.","total_count":1,"children":[]},{"name":"Share of training rows whose 'latest' feature was recorded in the future.","total_count":1,"children":[]},{"name":"Split FIRST, then encode -- the only way to see target-encoding leakage. The\u2026","total_count":1,"children":[]},{"name":"target_encode_in_fold()","total_count":1,"children":[]},{"name":"target_encode_naive()","total_count":1,"children":[]},{"name":"window_aggregates()","total_count":1,"children":[]},{"name":"WRONG: attach each user's most recent feature value, ignoring time. This is\u2026","total_count":1,"children":[]}]},{"name":"filters.py","total_count":21,"children":[{"name":".embed()","total_count":1,"children":[]},{"name":".exact_top_k()","total_count":1,"children":[]},{"name":".filtered_ann()","total_count":1,"children":[]},{"name":".from_searcher()","total_count":1,"children":[]},{"name":".post_filter()","total_count":1,"children":[]},{"name":".pre_filter()","total_count":1,"children":[]},{"name":".recall_against()","total_count":1,"children":[]},{"name":"access_filter()","total_count":1,"children":[]},{"name":"Ask the index for fetch_k, then throw away whatever does not match.","total_count":1,"children":[]},{"name":"Brute-force cosine over the matching subset -- the correct answer.","total_count":1,"children":[]},{"name":"Clone the base collection into a filter-aware one with rich payloads.","total_count":1,"children":[]},{"name":"combo_filter()","total_count":1,"children":[]},{"name":"Deliberately narrow: ~1/3 x recency. This is where post-filter dies.","total_count":1,"children":[]},{"name":"Filter first, then scan the survivors exactly. Correct, but no index.","total_count":1,"children":[]},{"name":"Filtered vector search: the three strategies, measured side by side (NB5). Deck\u2026","total_count":1,"children":[]},{"name":"FilteredIndex","total_count":1,"children":[]},{"name":"Hand the filter to the engine and let it stay inside the index.","total_count":1,"children":[]},{"name":"One strategy's answer for one query.","total_count":1,"children":[]},{"name":"recent_filter()","total_count":1,"children":[]},{"name":"Result","total_count":1,"children":[]},{"name":"tenant_filter()","total_count":1,"children":[]}]},{"name":"main.py","total_count":8,"children":[{"name":"FastAPI service exposing /search?q=...&mode=keyword|semantic|hybrid. Run: `make\u2026","total_count":1,"children":[]},{"name":"healthz()","total_count":1,"children":[]},{"name":"lifespan()","total_count":1,"children":[]},{"name":"Load the Searcher once at startup. Embedding model + indexing the 1000 docs\u2026","total_count":1,"children":[]},{"name":"root()","total_count":1,"children":[]},{"name":"search()","total_count":1,"children":[]},{"name":"SearchHitOut","total_count":1,"children":[]},{"name":"SearchResponse","total_count":1,"children":[]}]},{"name":"metadata.py","total_count":9,"children":[{"name":"_digest()","total_count":1,"children":[]},{"name":"Deterministic per-document metadata for the advanced missions (NB5-NB8). Why\u2026","total_count":1,"children":[]},{"name":"doc_metadata()","total_count":1,"children":[]},{"name":"enrich()","total_count":1,"children":[]},{"name":"Fraction of `docs` matching `predicate` -- used to label filter strength.","total_count":1,"children":[]},{"name":"Return a copy of `doc` with derived metadata merged in.","total_count":1,"children":[]},{"name":"Return the derived metadata payload for one document.","total_count":1,"children":[]},{"name":"selectivity()","total_count":1,"children":[]},{"name":"Stable non-negative int from (doc_id, salt). Uses blake2b rather than builtin\u2026","total_count":1,"children":[]}]},{"name":"search.py","total_count":16,"children":[{"name":".__init__()","total_count":1,"children":[]},{"name":"._build_bm25()","total_count":1,"children":[]},{"name":"._build_vector_index()","total_count":1,"children":[]},{"name":"._load_docs()","total_count":1,"children":[]},{"name":"._search_hybrid()","total_count":1,"children":[]},{"name":"._search_keyword()","total_count":1,"children":[]},{"name":"._search_semantic()","total_count":1,"children":[]},{"name":"._tokenize()","total_count":1,"children":[]},{"name":".dict()","total_count":1,"children":[]},{"name":".from_corpus()","total_count":1,"children":[]},{"name":".search()","total_count":1,"children":[]},{"name":".size()","total_count":1,"children":[]},{"name":"Holds the BM25 index, Qdrant client, and document metadata. Construction is\u2026","total_count":1,"children":[]},{"name":"Searcher","total_count":1,"children":[]},{"name":"Searcher \u2014 keyword (BM25) + semantic (vector) + hybrid (RRF) on the lab corpus.\u2026","total_count":1,"children":[]},{"name":"SearchHit","total_count":1,"children":[]}]},{"name":"__init__.py","total_count":1,"children":[]}]},{"name":"notebooks","total_count":20,"children":[{"name":"01_embeddings_index.py","total_count":1,"children":[{"name":"# TODO: implement the embed + upsert loop here.","total_count":1,"children":[]}]},{"name":"02_hybrid_search_rrf.py","total_count":5,"children":[{"name":"# TODO: implement RRF fusion below.","total_count":1,"children":[]},{"name":"precision_at_10()","total_count":1,"children":[]},{"name":"search_hybrid()","total_count":1,"children":[]},{"name":"search_keyword()","total_count":1,"children":[]},{"name":"search_semantic()","total_count":1,"children":[]}]},{"name":"03_search_api_benchmark.py","total_count":2,"children":[{"name":"benchmark_mode()","total_count":1,"children":[]},{"name":"percentile()","total_count":1,"children":[]}]},{"name":"04_feast_feature_store.py","total_count":3,"children":[{"name":"make_item_popularity()","total_count":1,"children":[]},{"name":"make_query_velocity()","total_count":1,"children":[]},{"name":"make_user_profile()","total_count":1,"children":[]}]},{"name":"06_agent_retrieval.py","total_count":4,"children":[{"name":".plan()","total_count":1,"children":[]},{"name":"C\u1ed1 t\u00ecnh sinh ra m\u1ed9t filter kh\u00f4ng kh\u1edbp g\u00ec, \u0111\u1ec3 xem agent x\u1eed l\u00fd th\u1ebf n\u00e0o.","total_count":1,"children":[]},{"name":"evaluate()","total_count":1,"children":[]},{"name":"StarvingPlanner","total_count":1,"children":[]}]},{"name":"07_semantic_cache.py","total_count":2,"children":[{"name":"C\u00e1ch ng\u01b0\u1eddi th\u1eadt h\u1ecfi l\u1ea1i c\u00f9ng m\u1ed9t c\u00e2u.","total_count":1,"children":[]},{"name":"variants()","total_count":1,"children":[]}]},{"name":"_setup.py","total_count":1,"children":[{"name":"Path bootstrap for lab notebooks. Resolves the repo root (where `app/`,\u2026","total_count":1,"children":[]}]},{"name":"05_filtered_search.py","total_count":1,"children":[]},{"name":"08_feature_engineering.py","total_count":1,"children":[]}]},{"name":"pyproject.toml","total_count":1,"children":[{"name":"day19-vector-feature-store-lab","total_count":1,"children":[]}]},{"name":"scripts","total_count":27,"children":[{"name":"benchmark.py","total_count":4,"children":[{"name":"Benchmark harness: keyword vs semantic vs hybrid on the 50-query golden set.\u2026","total_count":1,"children":[]},{"name":"Fraction of top-k retrieved that are in the relevant set.","total_count":1,"children":[]},{"name":"main()","total_count":1,"children":[]},{"name":"precision_at_k()","total_count":1,"children":[]}]},{"name":"container-down.sh","total_count":1,"children":[{"name":"container-down.sh script","total_count":1,"children":[]}]},{"name":"container-up.sh","total_count":4,"children":[{"name":"container-up.sh script","total_count":1,"children":[]},{"name":"port_open()","total_count":1,"children":[]},{"name":"start()","total_count":1,"children":[]},{"name":"still_running()","total_count":1,"children":[]}]},{"name":"gen_agent_queries.py","total_count":2,"children":[{"name":"Generate compound (multi-intent) queries + brute-force ground truth for NB6.\u2026","total_count":1,"children":[]},{"name":"main()","total_count":1,"children":[]}]},{"name":"gen_spend.py","total_count":2,"children":[{"name":"Generate the parquet source for the on-demand feature demo (NB8).","total_count":1,"children":[]},{"name":"main()","total_count":1,"children":[]}]},{"name":"runtime-check.sh","total_count":3,"children":[{"name":"bold()","total_count":1,"children":[]},{"name":"row()","total_count":1,"children":[]},{"name":"runtime-check.sh script","total_count":1,"children":[]}]},{"name":"seed_corpus.py","total_count":4,"children":[{"name":"Build one doc with mixed VN prose + key technical terms.","total_count":1,"children":[]},{"name":"Generate the lab corpus + golden eval set deterministically. Outputs:\u2026","total_count":1,"children":[]},{"name":"main()","total_count":1,"children":[]},{"name":"make_doc()","total_count":1,"children":[]}]},{"name":"verify_docker.py","total_count":4,"children":[{"name":"can_reach()","total_count":1,"children":[]},{"name":"Docker path smoke test. Verifies all 3 services brought up by docker-compose\u2026","total_count":1,"children":[]},{"name":"main()","total_count":1,"children":[]},{"name":"step()","total_count":1,"children":[]}]},{"name":"verify_lite.py","total_count":3,"children":[{"name":"5-second smoke test for the lite path. Verifies the full stack works end-to-end\u2026","total_count":1,"children":[]},{"name":"main()","total_count":1,"children":[]},{"name":"step()","total_count":1,"children":[]}]}]},{"name":"setup-docker.sh","total_count":1,"children":[{"name":"setup-docker.sh script","total_count":1,"children":[]}]},{"name":"setup-lite.sh","total_count":1,"children":[{"name":"setup-lite.sh script","total_count":1,"children":[]}]},{"name":"tests","total_count":62,"children":[{"name":"conftest.py","total_count":4,"children":[{"name":"A 60-doc slice of the real corpus: same schema, ~1 s to index.","total_count":1,"children":[]},{"name":"index()","total_count":1,"children":[]},{"name":"mini_corpus()","total_count":1,"children":[]},{"name":"Shared fixtures. Kept deliberately small so `make test` stays under a minute.","total_count":1,"children":[]}]},{"name":"test_agent.py","total_count":10,"children":[{"name":"A topic in the enum that does not exist in the corpus silently returns zero\u2026","total_count":1,"children":[]},{"name":"If this breaks, the NB6 comparison silently becomes unfair.","total_count":1,"children":[]},{"name":"test_agent_relaxes_a_starving_filter()","total_count":1,"children":[]},{"name":"test_budget_is_split_not_multiplied()","total_count":1,"children":[]},{"name":"test_build_context_runs_without_feast()","total_count":1,"children":[]},{"name":"test_planner_keeps_simple_questions_whole()","total_count":1,"children":[]},{"name":"test_planner_splits_compound_questions()","total_count":1,"children":[]},{"name":"test_tool_schema_is_wellformed()","total_count":1,"children":[]},{"name":"test_tool_topic_enum_matches_the_corpus()","total_count":1,"children":[]},{"name":"test_use_filters_false_emits_no_filters()","total_count":1,"children":[]}]},{"name":"test_cache.py","total_count":11,"children":[{"name":"embedder()","total_count":1,"children":[]},{"name":"Guards the teaching demo in NB7 \u00a74 -- if this ever passes silently, the\u2026","total_count":1,"children":[]},{"name":"make()","total_count":1,"children":[]},{"name":"test_identical_question_hits()","total_count":1,"children":[]},{"name":"test_missing_namespace_leaks_on_purpose()","total_count":1,"children":[]},{"name":"test_namespacing_blocks_cross_tenant_read()","total_count":1,"children":[]},{"name":"test_stats_track_hits_and_misses()","total_count":1,"children":[]},{"name":"test_threshold_controls_hits()","total_count":1,"children":[]},{"name":"test_ttl_expires_entry()","total_count":1,"children":[]},{"name":"test_unrelated_question_misses()","total_count":1,"children":[]},{"name":"The security case: tenant B must never receive tenant A's answer.","total_count":1,"children":[]}]},{"name":"test_embeddings.py","total_count":12,"children":[{"name":"Guards the EMBEDDING_BACKEND contract. This variable was documented in\u2026","total_count":1,"children":[]},{"name":"Qdrant collections are created with this number; a wrong one is a silent\u2026","total_count":1,"children":[]},{"name":"Regression: the collection was created from a hard-coded EMBED_DIM.","total_count":1,"children":[]},{"name":"test_default_backend_is_unchanged()","total_count":1,"children":[]},{"name":"test_default_embedding_matches_declared_dim()","total_count":1,"children":[]},{"name":"test_env_var_is_actually_honoured()","total_count":1,"children":[]},{"name":"test_every_backend_declares_a_distinct_dim()","total_count":1,"children":[]},{"name":"test_explicit_argument_beats_env()","total_count":1,"children":[]},{"name":"test_searcher_collection_uses_backend_dim()","total_count":1,"children":[]},{"name":"test_unknown_backend_fails_loudly()","total_count":1,"children":[]},{"name":"The lite path and every rubric threshold depend on this exact default.","total_count":1,"children":[]},{"name":"The original bug: the variable existed but changed nothing.","total_count":1,"children":[]}]},{"name":"test_features.py","total_count":12,"children":[{"name":"events()","total_count":1,"children":[]},{"name":"First event of a user can have no history -- else we are reading the future.","total_count":1,"children":[]},{"name":"test_auc_matches_known_values()","total_count":1,"children":[]},{"name":"test_events_are_deterministic()","total_count":1,"children":[]},{"name":"test_frequency_encoding_never_uses_the_label()","total_count":1,"children":[]},{"name":"test_in_fold_encoding_covers_every_row()","total_count":1,"children":[]},{"name":"test_leak_is_smaller_on_lower_cardinality_key()","total_count":1,"children":[]},{"name":"test_naive_target_encoding_leaks_on_high_cardinality()","total_count":1,"children":[]},{"name":"test_pit_join_never_sees_the_future()","total_count":1,"children":[]},{"name":"test_window_counts_are_monotone_by_window_size()","total_count":1,"children":[]},{"name":"test_window_features_are_causal()","total_count":1,"children":[]},{"name":"The headline result of NB8 \u00a74 -- lock it in so the lesson cannot rot.","total_count":1,"children":[]}]},{"name":"test_filters.py","total_count":7,"children":[{"name":"Regression: topic was missing, so every topic filter matched zero docs.","total_count":1,"children":[]},{"name":"test_every_returned_doc_satisfies_the_filter()","total_count":1,"children":[]},{"name":"test_filtered_ann_matches_exact_ground_truth()","total_count":1,"children":[]},{"name":"test_index_carries_topic_payload()","total_count":1,"children":[]},{"name":"test_overfetch_restores_post_filter_recall()","total_count":1,"children":[]},{"name":"test_post_filter_loses_recall_when_filter_is_selective()","total_count":1,"children":[]},{"name":"The whole point of NB5: this is a cliff, not a gentle slope.","total_count":1,"children":[]}]},{"name":"test_metadata.py","total_count":6,"children":[{"name":"Must not depend on PYTHONHASHSEED, or the rubric becomes ungradable.","total_count":1,"children":[]},{"name":"test_enrich_preserves_original_fields()","total_count":1,"children":[]},{"name":"test_metadata_differs_across_docs()","total_count":1,"children":[]},{"name":"test_metadata_is_deterministic()","total_count":1,"children":[]},{"name":"test_published_ts_is_sortable_int()","total_count":1,"children":[]},{"name":"test_tenants_are_roughly_balanced()","total_count":1,"children":[]}]}]}]};
+
+    function transformData(jsonData) {
+        // Helper function to recursively build the children structure
+        function processNode(node, parentL1StageName) {
+            let displayName = node.name;
+            // Append total_count if it exists and is not already in the name
+            if (node.total_count !== undefined) {
+                if (!/\(Total Count: \d+\)$/.test(displayName)) {
+                    displayName += ` (Total Count: ${node.total_count})`;
+                }
+            }
+
+            const newNode = { name: displayName };
+
+            if (parentL1StageName === "Root") {
+                 newNode.originalStageName = node.name;
+            } else {
+                newNode.originalStageName = parentL1StageName;
+            }
+
+            if (node.children && node.children.length > 0) {
+                const stageNameToPass = (parentL1StageName === "Root") ? node.name : parentL1StageName;
+                newNode.children = node.children.map(child => processNode(child, stageNameToPass));
+            }
+
+            return newNode;
+        }
+
+        let rootDisplayName = jsonData.name;
+        if (jsonData.total_count !== undefined && !/\(Total Count: \d+\)$/.test(rootDisplayName)) {
+            rootDisplayName += ` (Total Count: ${jsonData.total_count})`;
+        }
+
+        return {
+            name: rootDisplayName,
+            originalStageName: "Root",
+            children: (jsonData.children || []).map(child => processNode(child, "Root"))
+        };
+    }
+
+    const treeData = transformData(initialJsonData);
+
+    // Auto-populated phaseColors: every depth-1 child of the root gets
+    // a stable colour from a bigger palette so all top-level dirs are
+    // distinguishable.
+    const PALETTE = [
+      ["#3498DB","#2980B9","#AED6F1"], ["#2ECC71","#27AE60","#A9DFBF"],
+      ["#E74C3C","#C0392B","#F5B7B1"], ["#9B59B6","#8E44AD","#D7BDE2"],
+      ["#F39C12","#D68910","#FAD7A0"], ["#1ABC9C","#117864","#A2D9CE"],
+      ["#34495E","#1B2631","#ABB2B9"], ["#E67E22","#BA4A00","#F5CBA7"],
+      ["#16A085","#0E6655","#A2D9CE"], ["#D35400","#A04000","#EDBB99"],
+      ["#7F8C8D","#566573","#D5DBDB"], ["#C0392B","#7B241C","#F5B7B1"],
+      ["#2E86C1","#1B4F72","#A9CCE3"], ["#28B463","#196F3D","#A9DFBF"],
+      ["#AF7AC5","#6C3483","#D2B4DE"],
+    ];
+    const phaseColors = { "Root": { fill: "#4A4A4A", stroke: "#333333", collapsedFill: "#6C757D" },
+                          "Default": { fill: "#BDC3C7", stroke: "#95A5A6", collapsedFill: "#ECF0F1" } };
+    (initialJsonData.children || []).forEach((c, i) => {
+      const pal = PALETTE[i % PALETTE.length];
+      phaseColors[c.name] = { fill: pal[0], stroke: pal[1], collapsedFill: pal[2] };
+    });
+
+    const levelSpecificPalettes = {
+      0: { fill: "#4A4A4A", stroke: "#333333", collapsedFill: "#6C757D" },
+      2: { fill: "#6ab04c", stroke: "#508a38", collapsedFill: "#a3d391" },
+      3: { fill: "#f0932b", stroke: "#d0730f", collapsedFill: "#f6c07e" },
+      4: { fill: "#be2edd", stroke: "#a01cb3", collapsedFill: "#e08bf2" },
+      5: { fill: "#00a8ff", stroke: "#007ac1", collapsedFill: "#74d2ff" },
+      6: { fill: "#e55039", stroke: "#c23620", collapsedFill: "#f09a8d" },
+      default: { fill: "#747d8c", stroke: "#57606f", collapsedFill: "#a4b0be" }
+    };
+
+    const svgElement = d3.select("#tree-svg");
+    const initialSvgWidth = +svgElement.attr("width");
+    const initialSvgHeight = +svgElement.attr("height");
+    const margin = { top: 40, right: 120, bottom: 80, left: 450 };
+    let width = initialSvgWidth - margin.left - margin.right;
+    let height = initialSvgHeight - margin.top - margin.bottom;
+    const duration = 500;
+    let nodeCounter = 0;
+    const g = svgElement.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+    const treemap = d3.tree().nodeSize([40, 0]);
+    let rootNode = d3.hierarchy(treeData, d => d.children);
+    rootNode.x0 = 0;
+    rootNode.y0 = 0;
+
+    if (rootNode.children) {
+      rootNode.children.forEach(d_child => {
+        if (d_child.children) { collapseBranch(d_child); }
+      });
+    }
+    updateTree(rootNode);
+
+    function collapseBranch(d) { if (d.children) { d._children = d.children; d._children.forEach(collapseBranch); d.children = null; } }
+    function expandBranch(d) { if (d._children) { d.children = d._children; d._children = null; } if (d.children) { d.children.forEach(expandBranch); } }
+    window.expandAll = () => { expandBranch(rootNode); updateTree(rootNode); };
+    window.collapseAll = () => { if (rootNode.children) { rootNode.children.forEach(collapseBranch); } updateTree(rootNode); };
+    window.resetView = () => { if (rootNode.children) { rootNode.children.forEach(d_child => { if (d_child.children || d_child._children) { collapseBranch(d_child); } }); } if (rootNode._children && !rootNode.children) { rootNode.children = rootNode._children; rootNode._children = null; } updateTree(rootNode); };
+
+    function updateTree(source) {
+      const treeLayoutData = treemap(rootNode);
+      let nodes = treeLayoutData.descendants();
+      let links = treeLayoutData.descendants().slice(1);
+
+      let minX = 0;
+      let maxX = 0;
+      if (nodes.length > 0) {
+        minX = d3.min(nodes, d => d.x);
+        maxX = d3.max(nodes, d => d.x);
+      }
+
+      let neededHeight = Math.max(initialSvgHeight, maxX - minX + margin.top + margin.bottom + 100);
+      svgElement.transition().duration(duration / 2).attr("height", neededHeight);
+      g.transition().duration(duration / 2).attr("transform", `translate(${margin.left},${margin.top - minX + 40})`);
+
+      nodes.forEach(d => { d.y = d.depth * 400; }); // Adjust horizontal separation if needed
+
+      const node = g.selectAll('g.node').data(nodes, d => d.id || (d.id = ++nodeCounter));
+      const nodeEnter = node.enter().append('g')
+        .attr('class', d => "node" + (d.children || d._children ? " node--internal" : " node--leaf") + (d._children ? " _children" : ""))
+        .attr('transform', d => `translate(${source.y0},${source.x0})`)
+        .on('click', (event, d) => { if (d.children) { d._children = d.children; d.children = null; } else if (d._children) { d.children = d._children; d._children = null; } updateTree(d); })
+        .style('cursor', d => (d.children || d._children) ? 'pointer' : 'default');
+
+      nodeEnter.append('circle').attr('r', 1e-6);
+
+      nodeEnter.append('text')
+        .attr('dy', '.35em')
+        .attr('x', d => d.children || d._children ? -14 : 14)
+        .attr('text-anchor', d => d.children || d._children ? 'end' : 'start')
+        .style("fill-opacity", 1e-6)
+        .call(wrapText, 380);
+
+      const nodeUpdate = nodeEnter.merge(node);
+      nodeUpdate.transition().duration(duration)
+        .attr('transform', d => `translate(${d.y},${d.x})`)
+        .attr('class', d => "node" + (d.children ? " node--internal" : " node--leaf") + (d._children ? " node--internal _children" : ""));
+
+      nodeUpdate.select('circle').attr('r', 8.5)
+        .style('fill', d => {
+            let palette;
+            if (d.depth === 0) {
+                palette = levelSpecificPalettes[0];
+            } else if (d.depth === 1) {
+                palette = phaseColors[d.data.originalStageName] || phaseColors.Default;
+            } else {
+                palette = levelSpecificPalettes[d.depth] || levelSpecificPalettes.default;
+            }
+            if (d._children) return palette.collapsedFill;
+            if (d.children) return palette.fill;
+            return "#fff";
+        })
+        .style('stroke', d => {
+            let palette;
+            if (d.depth === 0) {
+                palette = levelSpecificPalettes[0];
+            } else if (d.depth === 1) {
+                palette = phaseColors[d.data.originalStageName] || phaseColors.Default;
+            } else {
+                palette = levelSpecificPalettes[d.depth] || levelSpecificPalettes.default;
+            }
+            return palette.stroke;
+        });
+      nodeUpdate.select('text').style("fill-opacity", 1).call(wrapText, 380);
+
+      const nodeExit = node.exit().transition().duration(duration).attr('transform', d => `translate(${source.y},${source.x})`).remove();
+      nodeExit.select('circle').attr('r', 1e-6);
+      nodeExit.select('text').style('fill-opacity', 1e-6);
+
+      const link = g.selectAll('path.link').data(links, d => d.id);
+      const linkEnter = link.enter().insert('path', "g").attr('class', 'link').attr('d', d => { const o = { x: source.x0, y: source.y0 }; return diagonal(o, o); });
+
+      linkEnter.merge(link).transition().duration(duration).attr('d', d => diagonal(d, d.parent))
+        .style('stroke', d => {
+            const sourceNode = d.parent;
+            if (!sourceNode) return phaseColors.Default.stroke;
+            const l1AncestorName = sourceNode.data.originalStageName;
+            const colorPalette = phaseColors[l1AncestorName] || phaseColors.Default;
+            return colorPalette.stroke;
+        });
+      link.exit().transition().duration(duration).attr('d', d => { const o = { x: source.x, y: source.y }; return diagonal(o, o); }).remove();
+      nodes.forEach(d => { d.x0 = d.x; d.y0 = d.y; });
+    }
+
+    function diagonal(s, d) { return `M ${s.y} ${s.x} C ${(s.y + d.y) / 2} ${s.x}, ${(s.y + d.y) / 2} ${d.x}, ${d.y} ${d.x}`; }
+
+    function wrapText(textElements, maxWidth) {
+        const textPartColors = {
+            name: '#343a40',
+            count: '#0056b3'
+        };
+        const countRegex = /(\s\(Total Count: \d+\))$/;
+
+        textElements.each(function () {
+            const textD3 = d3.select(this);
+            const originalNodeText = textD3.datum().data.name;
+            const x = parseFloat(textD3.attr("x") || 0);
+            const initialDy = textD3.attr("dy");
+            const textAnchor = textD3.attr("text-anchor");
+            const lineHeight = 1.1;
+
+            textD3.text(null);
+
+            let namePart = originalNodeText;
+            let countPartText = "";
+
+            const countMatch = originalNodeText.match(countRegex);
+            if (countMatch && originalNodeText.endsWith(countMatch[0])) {
+                namePart = originalNodeText.substring(0, originalNodeText.length - countMatch[0].length).trim();
+                countPartText = countMatch[0].trim();
+            }
+
+            const tokens = [];
+            namePart.split(/\s+/).filter(Boolean).forEach(word => {
+                tokens.push({ text: word, type: 'name' });
+            });
+            if (countPartText) {
+                tokens.push({ text: countPartText, type: 'count' });
+            }
+
+            if (tokens.length === 0 && originalNodeText) {
+                tokens.push({ text: originalNodeText, type: 'name' });
+            }
+
+            let currentTspan = textD3.append("tspan").attr("x", x).attr("dy", initialDy);
+            if (textAnchor === "end") currentTspan.attr("text-anchor", "end");
+
+            let lineTokens = [];
+
+            for (let i = 0; i < tokens.length; i++) {
+                const tokenObj = tokens[i];
+
+                lineTokens.push(tokenObj);
+                currentTspan.text(lineTokens.map(t => t.text).join(" "));
+
+                if (currentTspan.node().getComputedTextLength() > maxWidth && lineTokens.length > 1) {
+                    lineTokens.pop();
+
+                    currentTspan.text(null);
+                    lineTokens.forEach((prevToken, idx) => {
+                        currentTspan.append("tspan")
+                            .text((idx > 0 ? " " : "") + prevToken.text)
+                            .style("fill", textPartColors[prevToken.type] || textPartColors.name)
+                            .style("font-weight", prevToken.type === 'count' ? "bold" : "normal");
+                    });
+
+                    lineTokens = [tokenObj];
+                    currentTspan = textD3.append("tspan").attr("x", x).attr("dy", lineHeight + "em");
+                    if (textAnchor === "end") currentTspan.attr("text-anchor", "end");
+                }
+            }
+
+            currentTspan.text(null);
+            lineTokens.forEach((token, idx) => {
+                currentTspan.append("tspan")
+                    .text((idx > 0 ? " " : "") + token.text)
+                    .style("fill", textPartColors[token.type] || textPartColors.name)
+                    .style("font-weight", token.type === 'count' ? "bold" : "normal");
+            });
+
+            if (textD3.selectAll("tspan > tspan").empty() && textD3.select("tspan").text().length === 0 && originalNodeText) {
+                let t = textD3.select("tspan");
+                let displayText = originalNodeText;
+                t.text(displayText).style("fill", textPartColors.name);
+                if (t.node() && t.node().getComputedTextLength() > maxWidth && displayText.length > 20) {
+                    let estimatedChars = Math.floor(maxWidth / (t.node().getComputedTextLength()/displayText.length) );
+                    displayText = displayText.substring(0, Math.max(0, estimatedChars - 3)) + "...";
+                    t.text(displayText);
+                }
+            }
+        });
+    }
+  </script>
+</body>
+</html>
