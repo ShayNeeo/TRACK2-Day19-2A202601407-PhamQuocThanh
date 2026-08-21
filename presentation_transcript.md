@@ -8,7 +8,7 @@
 
 ### [00:00 – 02:00] Slide 1: Giới thiệu & Tổng quan Kiến trúc
 
-> *"Kính chào Giảng viên và Hội đồng đánh giá. Em là Phạm Quốc Thành, học viên Cohort A20-K1. Hôm nay em xin phép trình bày báo cáo kỹ thuật và bảo vệ kết quả thực nghiệm bài Lab 19: Kiến trúc Vector Store & Feature Store trong hệ thống AI thời gian thực.*
+> *"Kính chào Giảng viên và Hội đồng đánh giá. Em là Phạm Quốc Thanh, học viên Cohort A20-K1. Hôm nay em xin phép trình bày báo cáo kỹ thuật và bảo vệ kết quả thực nghiệm bài Lab 19: Kiến trúc Vector Store & Feature Store trong hệ thống AI thời gian thực.*
 >
 > *Trong bài lab này, mục tiêu của em là giải quyết 2 bài toán lớn trong sản xuất:*
 > 1. *Truy xuất thông tin ngữ nghĩa lai (Hybrid Search) kết hợp giữa độ phủ rộng của Vector Store và độ chính xác của BM25.*
